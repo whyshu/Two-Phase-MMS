@@ -2,8 +2,10 @@
 public class InputBlock extends Block{
 
     private int counter = -1;
+    private String _fileName;
 
     public InputBlock(String fileName) {
+        _fileName = fileName;
         load();
     }
 

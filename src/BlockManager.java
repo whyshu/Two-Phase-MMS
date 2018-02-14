@@ -10,7 +10,7 @@ public class BlockManager {
 
     public BlockManager(int fileCount) {
         _fileCount = fileCount;
-        for (int i =1; i<=fileCount; i++) {
+        for (int i = 1; i<=fileCount; i++) {
             InputBlock ip = new InputBlock(String.valueOf(i) + ".txt");
             _inputBlocks.add(ip);
         }
