@@ -1,17 +1,34 @@
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
 
 public class InputBlock extends Block{
 
     private int counter = -1;
     private String _fileName;
+    LineNumberReader _reader;
+    ArrayList<String> _currrentBlock = new ArrayList<>();
 
     public InputBlock(String fileName) {
-        _fileName = fileName;
-        load();
+        try {
+            _fileName = fileName;
+            String fullPathToFile = "D:\\Study\\Two-Phase-MMS\\data\\" + fileName;
+            _reader = new LineNumberReader(new InputStreamReader(new FileInputStream(fullPathToFile), "UTF-8"));
+            load();
+        }
+        catch (Exception e){
+            System.out.println("Exception Occured" + e.getMessage());
+        }
     }
 
     public String getData() {
         int nextDataIndex = computeNextDataIndex();
         return getRecord(nextDataIndex);
+    }
+
+    public boolean isDataAvailable() {
+        return _currrentBlock.size() > 0;
     }
 
     public String getCurrentData() {
@@ -27,7 +44,7 @@ public class InputBlock extends Block{
     }
 
     private void loadNextBlockIntoMemory() {
-
+        _currrentBlock = getBlock();
     }
 
     private int computeNextDataIndex(){
@@ -42,6 +59,29 @@ public class InputBlock extends Block{
     }
 
     private String getRecord(int index) {
-        return String.valueOf(index);
+        if(isDataAvailable()) {
+            return _currrentBlock.get(index);
+        }
+        else {
+            return "";
+        }
+    }
+
+    public ArrayList<String> getBlock()  {
+        ArrayList<String> lines = new ArrayList<>();
+        int lineCounter = 0;
+        try{
+            String line;
+            while ( lineCounter < 40  && ((line = _reader.readLine()) != null)) {
+                lines.add(line);
+                lineCounter = lineCounter + 1;
+            }
+        }
+        catch (Exception e)
+        {
+            e.fillInStackTrace();
+        }
+        System.out.println("LC " + lineCounter);
+        return lines;
     }
 }

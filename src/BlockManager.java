@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlockManager {
 
@@ -17,10 +19,10 @@ public class BlockManager {
     }
 
     public  void execute() {
-        InputBlock minInputBlock = _inputBlocks.get(0);
-        for (InputBlock inputBlock : _inputBlocks) {
-            if(inputBlock.getCurrentData().compareTo(minInputBlock.getCurrentData()) < 0)
-            {
+        List<InputBlock> blocks = _inputBlocks.stream().filter(x -> x.isDataAvailable()).collect(Collectors.toList());
+        InputBlock minInputBlock = blocks.get(0);
+        for (InputBlock inputBlock : blocks) {
+            if (Integer.parseInt(inputBlock.getCurrentData()) < Integer.parseInt(minInputBlock.getCurrentData())) {
                 minInputBlock = inputBlock;
             }
         }
