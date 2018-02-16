@@ -12,13 +12,13 @@ public class BlockManager {
 
     public BlockManager(int fileCount) {
         _fileCount = fileCount;
-        for (int i = 1; i<=fileCount; i++) {
-            InputBlock ip = new InputBlock(String.valueOf(i) + ".txt");
+        for (int i = 0; i < fileCount; i++) {
+            InputBlock ip = new InputBlock("data" + String.valueOf(i) + ".txt");
             _inputBlocks.add(ip);
         }
     }
 
-    public  void execute() {
+    public void execute() {
         List<InputBlock> blocks = _inputBlocks.stream().filter(x -> x.isDataAvailable()).collect(Collectors.toList());
         InputBlock minInputBlock = blocks.get(0);
         for (InputBlock inputBlock : blocks) {
