@@ -1,6 +1,7 @@
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -21,15 +22,17 @@ public class ChunkFileSplitter {
             e.printStackTrace();
         }
     }
-    public void execute(int blockCount) {
+    public ArrayList<String> execute(int blockCount) {
         int chunkCount=0;
+        ArrayList<String> chunkFileList=new ArrayList<>();
         BufferedWriter bw = null;
         int k = 0;
         try {
             while (_scanner.hasNextLine()) {
                 String line;
                 int lineCounter = 0;
-                bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR + Constants.UNSORTED_FILE_PREFIX + chunkCount + ".txt", true));
+                String currentFileName= Constants.UNSORTED_FILE_PREFIX + chunkCount + ".txt";
+                bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR+currentFileName, true));
                 while ((lineCounter < blockCount * 40) && ( line =_scanner.nextLine())!= null ) {
                     System.out.println(line);
                     bw.write(line);
@@ -37,6 +40,7 @@ public class ChunkFileSplitter {
                     lineCounter++;
                 }
                 bw.close();
+                chunkFileList.add(currentFileName);
                 chunkCount++;
                 k++;
             }
@@ -44,5 +48,6 @@ public class ChunkFileSplitter {
         } catch (Exception e) {
             e.fillInStackTrace();
         }
+        return chunkFileList;
     }
 }
