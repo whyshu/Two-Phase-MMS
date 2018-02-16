@@ -11,12 +11,23 @@ public class MMSMain {
 //        for (int i =0; i< 120; i++) {
 //            op.add(String.valueOf(i));
 //        }
-//        BlockManager bm = new BlockManager(3);
-//        for (int i=0; i<240; i++) {
-//            bm.execute();
-//        }
-        ChunkFileSplitter chunkFileSplitter=new ChunkFileSplitter("D:\\Study\\Two-Phase-MMS\\data\\input.txt");
+
+        ChunkFileSplitter chunkFileSplitter=new ChunkFileSplitter("F:\\TwoPhaseMMS_git\\data\\input.txt");
         chunkFileSplitter.execute(2);
+        
+        
+        ArrayList<String> chunkFileList=new ArrayList<>();
+        chunkFileList.add("data0.txt");
+        chunkFileList.add("data1.txt");
+        chunkFileList.add("data2.txt");       
+        ChunkFileSorter chunkFileSorter=new ChunkFileSorter(chunkFileList);
+        chunkFileSorter.sort();
+        
+//      BlockManager bm = new BlockManager(3);
+//      for (int i=0; i<240; i++) {
+//          bm.execute();
+//      }
+        
 //        LineNumberReader reader =  new LineNumberReader(new InputStreamReader(new FileInputStream("D:\\Study\\Two-Phase-MMS\\data\\1.txt"), "UTF-8"));
 //        System.out.println(getBlock(reader).size());
 //        System.out.println(getBlock(reader).size());
