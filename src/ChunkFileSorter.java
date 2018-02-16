@@ -27,7 +27,7 @@ public class ChunkFileSorter {
 				}
 				file.delete();
 				Collections.sort(L);
-				writeFile("sorted_"+fileName,L);
+				writeFile(fileName+"sorted.txt",L);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

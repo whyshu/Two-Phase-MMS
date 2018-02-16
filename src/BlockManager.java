@@ -13,7 +13,7 @@ public class BlockManager {
     public BlockManager(int fileCount) {
         _fileCount = fileCount;
         for (int i = 0; i < fileCount; i++) {
-            InputBlock ip = new InputBlock("data" + String.valueOf(i) + ".txt");
+            InputBlock ip = new InputBlock("data" + String.valueOf(i) + ".txtsorted.txt");
             _inputBlocks.add(ip);
         }
     }
