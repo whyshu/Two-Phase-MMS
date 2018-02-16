@@ -39,7 +39,7 @@ public class OutputBlock extends Block{
         BufferedWriter bw=null;
         try {
             try {
-                bw = new BufferedWriter(new FileWriter("data\\out.txt",true));
+                bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR + Constants.OUTPUT_FILE,true));
                 for (String value : _opBuffer) {
                     bw.write(value);
                     bw.newLine();

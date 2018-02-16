@@ -13,7 +13,7 @@ public class InputBlock extends Block{
     public InputBlock(String fileName) {
         try {
             _fileName = fileName;
-            String fullPathToFile = "data\\" + fileName;
+            String fullPathToFile = Constants.DATA_DIR + fileName;
             _reader = new LineNumberReader(new InputStreamReader(new FileInputStream(fullPathToFile), "UTF-8"));
             load();
         }

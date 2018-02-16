@@ -19,7 +19,8 @@ public class ChunkFileSorter {
 		try {
 			for(String fileName:_chunkFileList){
 				//Open the file
-				File file=new File(fileName);
+				String fullPathtoFile = Constants.DATA_DIR + fileName;
+				File file=new File(fullPathtoFile);
 				Scanner sortScan=new Scanner(file);
 			    List<Integer> L = new ArrayList<Integer>();
 				while(sortScan.hasNextLine()){
@@ -27,7 +28,7 @@ public class ChunkFileSorter {
 				}
 				file.delete();
 				Collections.sort(L);
-				writeFile(fileName+"sorted.txt",L);
+				writeFile(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX),L);
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -39,7 +40,8 @@ public class ChunkFileSorter {
 		BufferedWriter bw=null;
         try {
             try {
-                bw = new BufferedWriter(new FileWriter(fileName,true));
+            	String fullPathToFile = Constants.DATA_DIR + fileName;
+                bw = new BufferedWriter(new FileWriter(fullPathToFile,true));
                 for (Object value : sortedLines) {
                 	System.out.println("Sorted::"+value.toString()+"File name :: "+fileName);
                     bw.write(value.toString());
