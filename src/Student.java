@@ -2,12 +2,12 @@
 public class Student {
 
     public Student(String studentTuple) {
-        ID = Integer.parseInt(studentTuple.substring(0,7));
-        firstName = studentTuple.substring(8,17);
-        lastName = studentTuple.substring(18,27);
-        department = Integer.parseInt(studentTuple.substring(28,30));
-        program = Integer.parseInt(studentTuple.substring(31,33));
-        sinNumber = Integer.parseInt(studentTuple.substring(34,42));
+        ID = Integer.parseInt(studentTuple.substring(0,8));
+        firstName = studentTuple.substring(8,18);
+        lastName = studentTuple.substring(18,28);
+        department = Integer.parseInt(studentTuple.substring(28,31));
+        program = Integer.parseInt(studentTuple.substring(31,34));
+        sinNumber = Integer.parseInt(studentTuple.substring(34,43));
         address = studentTuple.substring(43);
     }
 
@@ -20,6 +20,6 @@ public class Student {
     public int sinNumber;
 
     public String toString(){
-        return ID + firstName + lastName + department + program + sinNumber + address;
+        return ID + firstName + lastName + department + String.format ("%03d", program) + String.format ("%09d", sinNumber) + address;
     }
 }

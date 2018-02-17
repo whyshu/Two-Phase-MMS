@@ -26,15 +26,14 @@ public class ChunkFileSplitter {
         int chunkCount=0;
         ArrayList<String> chunkFileList=new ArrayList<>();
         BufferedWriter bw = null;
-        int k = 0;
         try {
             while (_scanner.hasNextLine()) {
                 String line;
                 int lineCounter = 0;
                 String currentFileName= Constants.UNSORTED_FILE_PREFIX + chunkCount + ".txt";
                 bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR+currentFileName, true));
-                while ((lineCounter < blockCount * 40) && ( line =_scanner.nextLine())!= null ) {
-                    System.out.println(line);
+                while ((lineCounter < blockCount * 40) && _scanner.hasNextLine() && ( line =_scanner.nextLine())!= null ) {
+                    //System.out.println(line);
                     bw.write(line);
                     bw.newLine();
                     lineCounter++;
@@ -42,11 +41,10 @@ public class ChunkFileSplitter {
                 bw.close();
                 chunkFileList.add(currentFileName);
                 chunkCount++;
-                k++;
             }
             _scanner.close();
         } catch (Exception e) {
-            e.fillInStackTrace();
+            System.out.println(e.getMessage());
         }
         return chunkFileList;
     }

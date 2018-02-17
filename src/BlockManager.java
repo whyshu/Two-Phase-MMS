@@ -16,13 +16,15 @@ public class BlockManager {
             InputBlock ip = new InputBlock(Constants.SORTED_FILE_PREFIX + String.valueOf(i) + ".txt");
             _inputBlocks.add(ip);
         }
+        System.out.println(_inputBlocks.size());
     }
 
     public void execute() {
         List<InputBlock> blocks = _inputBlocks.stream().filter(x -> x.isDataAvailable()).collect(Collectors.toList());
+        System.out.println(blocks.size());
         InputBlock minInputBlock = blocks.get(0);
         for (InputBlock inputBlock : blocks) {
-            if (Integer.parseInt(inputBlock.getCurrentData()) < Integer.parseInt(minInputBlock.getCurrentData())) {
+            if (inputBlock.getCurrentData().ID < minInputBlock.getCurrentData().ID) {
                 minInputBlock = inputBlock;
             }
         }

@@ -8,7 +8,7 @@ public class InputBlock extends Block{
     private int counter = -1;
     private String _fileName;
     LineNumberReader _reader;
-    ArrayList<String> _currrentBlock = new ArrayList<>();
+    ArrayList<Student> _currrentBlock = new ArrayList<>();
 
     public InputBlock(String fileName) {
         try {
@@ -22,16 +22,20 @@ public class InputBlock extends Block{
         }
     }
 
-    public String getData() {
+    public Student getData() {
         int nextDataIndex = computeNextDataIndex();
         return getRecord(nextDataIndex);
     }
 
     public boolean isDataAvailable() {
-        return _currrentBlock.size() > 0;
+        boolean isDataAvailable =  _currrentBlock.size() > 0;
+        if(!isDataAvailable) {
+            System.out.println("Data not available" + _fileName);
+        }
+        return isDataAvailable;
     }
 
-    public String getCurrentData() {
+    public Student getCurrentData() {
         if(counter == -1) {
             getData();
         }
@@ -58,30 +62,32 @@ public class InputBlock extends Block{
         return counter;
     }
 
-    private String getRecord(int index) {
+    private Student getRecord(int index) {
         if(isDataAvailable()) {
             return _currrentBlock.get(index);
         }
         else {
-            return "";
+            return null;
         }
     }
 
-    public ArrayList<String> getBlock()  {
-        ArrayList<String> lines = new ArrayList<>();
+    public ArrayList<Student> getBlock()  {
+        ArrayList<Student> lines = new ArrayList<>();
         int lineCounter = 0;
         try{
             String line;
             while ( lineCounter < 40  && ((line = _reader.readLine()) != null)) {
-                lines.add(line);
+                //System.out.println(line);
+                Student s=new Student(line);
+                //System.out.println("Object Created");
+                lines.add(s);
                 lineCounter = lineCounter + 1;
             }
         }
         catch (Exception e)
         {
-            e.fillInStackTrace();
+           System.out.println(e.getMessage());
         }
-        System.out.println("LC " + lineCounter);
         return lines;
     }
 }
