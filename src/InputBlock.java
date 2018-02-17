@@ -29,9 +29,9 @@ public class InputBlock extends Block{
 
     public boolean isDataAvailable() {
         boolean isDataAvailable =  _currrentBlock.size() > 0;
-        if(!isDataAvailable) {
-            System.out.println("Data not available" + _fileName);
-        }
+//        if(!isDataAvailable) {
+//            System.out.println("Data not available" + _fileName);
+//        }
         return isDataAvailable;
     }
 
