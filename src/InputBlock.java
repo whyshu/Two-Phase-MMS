@@ -28,7 +28,7 @@ public class InputBlock extends Block{
     }
 
     public boolean isDataAvailable() {
-        boolean isDataAvailable =  _currentBlock.size() > 0;
+        boolean isDataAvailable =  counter < _currentBlock.size();
 //        if(!isDataAvailable) {
 //            System.out.println("Data not available" + _fileName);
 //        }
@@ -68,6 +68,7 @@ public class InputBlock extends Block{
 	            return _currentBlock.get(index);
 	        }
 	        else {
+	    		System.out.println("Requested block :: "+index+"File name :: "+_fileName+"Total number of lines :: "+_currentBlock.size());
 	            return null;
 	        }
     	}catch(Exception e){

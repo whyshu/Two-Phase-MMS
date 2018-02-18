@@ -18,6 +18,10 @@ public class BlockManager {
         }
         //System.out.println(_inputBlocks.size());
     }
+    
+    public void finish() {
+    	_outputBlock.finish();
+    }
 
     public void execute() {
         List<InputBlock> blocks = _inputBlocks.stream().filter(x -> x.isDataAvailable()).collect(Collectors.toList());

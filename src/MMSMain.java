@@ -13,8 +13,9 @@ public class MMSMain {
         ArrayList<String> sortedChunkFileList=chunkFileSorter.sort();
 
         BlockManager bm = new BlockManager(sortedChunkFileList.size());
-        for (int i=0; i<1200472; i++) {
+        for (int i=0; i<1197767; i++) {
           bm.execute();
         }
+        bm.finish();
     }
 }

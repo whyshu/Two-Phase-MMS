@@ -10,6 +10,7 @@ public class ChunkFileSorter {
 	public ChunkFileSorter(ArrayList<String> chunkFileList){
 		_chunkFileList=chunkFileList;
 	}
+	
 	public ArrayList<String> sort(){
 		ArrayList<String> sortedChunkFileList=new ArrayList<>();
 		try {

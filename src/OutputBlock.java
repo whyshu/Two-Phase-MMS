@@ -25,14 +25,14 @@ public class OutputBlock extends Block{
     }
 
     private void writeToFile() {
-        System.out.println("Block has been written to File");
+        //System.out.println("Block has been written to File");
         writeFile();
         freeBuffer();
     }
 
     private void freeBuffer(){
         _opBuffer.clear();
-        System.out.println("Output Buffer has been freed");
+        //System.out.println("Output Buffer has been freed");
     }
 
     private  void writeFile()  {
@@ -50,5 +50,9 @@ public class OutputBlock extends Block{
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public void finish() {
+    	writeToFile();
     }
 }
