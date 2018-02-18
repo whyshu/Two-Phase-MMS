@@ -1,5 +1,4 @@
 import sun.reflect.generics.tree.Tree;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,32 +18,30 @@ public class ChunkFileSorter {
 					String fullPathtoFile = Constants.DATA_DIR + fileName;
 					File file = new File(fullPathtoFile);
 					Scanner sortScan = new Scanner(file);
-					HashMap<Integer, Student> studentHashMap = new HashMap<>();
-					List<Integer> studentIDList = new ArrayList<>();
+					List<String> studentList = new ArrayList<>();
 					while (sortScan.hasNextLine()) {
-						Student student = new Student(sortScan.nextLine());
-						studentIDList.add(student.ID);
-						studentHashMap.put(student.ID, student);
+						Student s=new Student(sortScan.nextLine());
+						studentList.add(s.toString());
 					}
-					Collections.sort(studentIDList);
-					writeFile(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX), studentIDList, studentHashMap);
+					studentList.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, 8))));
+					writeFile(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX), studentList);
 					sortedChunkFileList.add(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX));
 			}
 		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		return sortedChunkFileList;
 	}
 
-	public void writeFile(String fileName,List<Integer> studentIDList,Map<Integer,Student> sortedStudentMap){
+	public void writeFile(String fileName,List<String> studentList){
 		BufferedWriter bw=null;
         try {
             try {
             	String fullPathToFile = Constants.DATA_DIR + fileName;
                 bw = new BufferedWriter(new FileWriter(fullPathToFile,true));
-				for (Integer studentID:studentIDList){
-					//System.out.println(sortedStudentMap.get(studentID).toString());
-                    bw.write(sortedStudentMap.get(studentID).toString());
+				for (String student:studentList){
+                    bw.write(student);
                     bw.newLine();
                 }
             }finally {
@@ -55,3 +52,4 @@ public class ChunkFileSorter {
         }
 	}
 }
+

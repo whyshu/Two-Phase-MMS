@@ -8,7 +8,7 @@ public class InputBlock extends Block{
     private int counter = -1;
     private String _fileName;
     LineNumberReader _reader;
-    ArrayList<Student> _currrentBlock = new ArrayList<>();
+    ArrayList<Student> _currentBlock = new ArrayList<>();
 
     public InputBlock(String fileName) {
         try {
@@ -28,7 +28,7 @@ public class InputBlock extends Block{
     }
 
     public boolean isDataAvailable() {
-        boolean isDataAvailable =  _currrentBlock.size() > 0;
+        boolean isDataAvailable =  _currentBlock.size() > 0;
 //        if(!isDataAvailable) {
 //            System.out.println("Data not available" + _fileName);
 //        }
@@ -48,7 +48,7 @@ public class InputBlock extends Block{
     }
 
     private void loadNextBlockIntoMemory() {
-        _currrentBlock = getBlock();
+        _currentBlock = getBlock();
     }
 
     private int computeNextDataIndex(){
@@ -63,12 +63,17 @@ public class InputBlock extends Block{
     }
 
     private Student getRecord(int index) {
-        if(isDataAvailable()) {
-            return _currrentBlock.get(index);
-        }
-        else {
-            return null;
-        }
+    	try{
+	        if(isDataAvailable()) {
+	            return _currentBlock.get(index);
+	        }
+	        else {
+	            return null;
+	        }
+    	}catch(Exception e){
+    		System.out.println(e.getMessage() + "Requested block :: "+index+"File name :: "+_fileName+"Total number of lines :: "+_currentBlock.size());
+    	}
+    	return null;
     }
 
     public ArrayList<Student> getBlock()  {

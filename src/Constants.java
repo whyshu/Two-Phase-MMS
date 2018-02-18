@@ -1,4 +1,4 @@
-
+import java.lang.Runtime;
 
 public class Constants {
     public static String DATA_DIR = "data\\";
@@ -6,4 +6,7 @@ public class Constants {
     public static String SORTED_FILE_PREFIX = "sorted_chunk_";
     public static String INPUT_FILE = "bag1.txt";
     public static String OUTPUT_FILE = "output.txt";
+    public static int RAM_SIZE=(int)Runtime.getRuntime().freeMemory();
+    public static int BLOCK_SIZE=4096;
+    public static int BLOCK_COUNT=(RAM_SIZE/BLOCK_SIZE)/4;
 }

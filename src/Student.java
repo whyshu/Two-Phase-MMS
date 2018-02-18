@@ -22,4 +22,8 @@ public class Student {
     public String toString(){
         return ID + firstName + lastName + department + String.format ("%03d", program) + String.format ("%09d", sinNumber) + address;
     }
+    
+    public int getStudentID(){
+    	return this.ID;
+    }
 }
