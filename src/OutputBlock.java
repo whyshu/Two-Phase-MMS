@@ -46,6 +46,9 @@ public class OutputBlock extends Block{
                 }
             }finally {
                 bw.close();
+                //Performance start
+                Performance.MergeWriteDiskIO++;
+                //Performance end
             }
         }catch (Exception e) {
             e.printStackTrace();

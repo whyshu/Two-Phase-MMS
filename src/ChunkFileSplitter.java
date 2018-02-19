@@ -37,6 +37,9 @@ public class ChunkFileSplitter {
                 bw.close();
                 chunkFileList.add(currentFileName);
                 chunkCount++;
+                //Performance start
+                Performance.SplitterDiskIO++;
+                //Performance end
             }
             _scanner.close();
         } catch (Exception e) {

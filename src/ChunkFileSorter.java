@@ -46,6 +46,9 @@ public class ChunkFileSorter {
                 }
             }finally {
                 bw.close();
+                //Performance start
+                Performance.SortDiskIO++;
+                //Performance end
             }
         }catch (Exception e) {
             e.printStackTrace();

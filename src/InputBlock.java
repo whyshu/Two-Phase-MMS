@@ -50,6 +50,9 @@ public class InputBlock extends Block{
 
     private void loadNextBlockIntoMemory() {
         _currentBlock = getBlock();
+        //Performance start
+        Performance.MergeReadDiskIO++;
+        //Performance end
     }
     
     public void finish() {

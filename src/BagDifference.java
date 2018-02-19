@@ -73,6 +73,9 @@ public class BagDifference {
                 }
             }finally {
                 bw.close();
+                //Performance start
+                Performance.BagDifferenceDiskIO++;
+               //Performance end
             }
         }catch (Exception e) {
             e.printStackTrace();
@@ -114,7 +117,7 @@ public class BagDifference {
 	    String[] splitStr1=line1.split("###");
 		String[] splitStr2=line2.split("###");
 		if(Integer.parseInt(splitStr1[1])>Integer.parseInt(splitStr2[1])){
-			System.out.println(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
+			//System.out.println(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
 			BagDiff.add(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
 		}else{
 			BagDiff.add(splitStr1[0]+" "+ 0);
