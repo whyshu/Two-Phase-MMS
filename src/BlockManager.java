@@ -21,6 +21,9 @@ public class BlockManager {
     
     public void finish() {
     	_outputBlock.finish();
+    	for (InputBlock inputblock : _inputBlocks) {
+    		inputblock.finish();
+    	}
     }
 
     public void execute() {

@@ -21,9 +21,9 @@ public class ChunkFileSorter {
 					Scanner sortScan = new Scanner(file);
 					List<String> studentList = new ArrayList<>();
 					while (sortScan.hasNextLine()) {
-						Student s=new Student(sortScan.nextLine());
-						studentList.add(s.toString());
+						studentList.add(sortScan.nextLine());
 					}
+					
 					studentList.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, 8))));
 					writeFile(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX), studentList);
 					sortedChunkFileList.add(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX));

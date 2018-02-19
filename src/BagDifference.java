@@ -1,34 +1,39 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Bag_difference {
-    public HashMap<String, Integer> readFile(String filename) {
+public class BagDifference {
+    public HashMap<String, Integer> readFile(String filename, String outputFilename) {
 
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        HashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
 
         try {
             BufferedReader inputFile = new BufferedReader(new FileReader(filename));
             String line = null;
             String prev = "s";
+            int counter = 0;
             while ((line = inputFile.readLine()) != null) {
                 if (prev.equals(line)) {
                     map.put(line, map.get(line) + 1);
                 } else {
+                	if (map.size()>10000){
+                		writeFile(outputFilename,map);
+                		map.clear();
+                	}
+                	counter++;
+                	System.out.println("Memory :: "+Runtime.getRuntime().freeMemory()+"Map size :: "+map.size() + " Counter " + counter);
                     map.put(line, 1);
                 }
-
                 prev = line;
-//                if (map.containsKey(line)) {
-//                    map.put(line, map.get(line) + 1);
-//                } else {
-//                    int value = 1;
-//                    map.put(line, value);
-//                }
             }
+            writeFile(outputFilename, map);
             inputFile.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -38,6 +43,24 @@ public class Bag_difference {
         return map;
     }
 
+    
+    public void writeFile(String fileName,HashMap<String,Integer> tupleList){
+		BufferedWriter bw=null;
+        try {
+            try {
+            	String fullPathToFile = Constants.DATA_DIR + fileName;
+                bw = new BufferedWriter(new FileWriter(fullPathToFile,true));
+                for (Map.Entry<String, Integer> entry : tupleList.entrySet()){
+                    bw.write(entry.getKey().toString()+"###"+entry.getValue().toString());
+                    bw.newLine();
+                }
+            }finally {
+                bw.close();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
 
     public void comapareTupple(HashMap<String, Integer> L1, HashMap<String, Integer> L2) {
 
@@ -51,15 +74,6 @@ public class Bag_difference {
 
         }
 
-    }
-
-    public static void main(String[] args) {
-        Bag_difference File1 = new Bag_difference();
-        HashMap<String, Integer> File1_value = File1.readFile("src/Bag1.txt");
-        HashMap<String, Integer> File2_value = File1.readFile("src/Bag2.txt");
-        File1.comapareTupple(File1_value, File2_value);
-        System.out.println(File1_value.size());
-        System.out.println(File2_value.size());
     }
 }
 
