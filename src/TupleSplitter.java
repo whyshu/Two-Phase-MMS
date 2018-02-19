@@ -22,6 +22,7 @@ public class TupleSplitter {
                     Student student=new Student(sortScan.nextLine());
                     //System.out.println(student.toString());
                 }
+                sortScan.close();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

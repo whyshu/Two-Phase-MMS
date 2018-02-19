@@ -16,6 +16,7 @@ public class LineCounter {
 		    while (lnr.readLine() != null){
 	            	lineNumber++;
 	        }
+		    lnr.close();
 			return lineNumber;
 		} catch (Exception e) {
 				System.out.println(e.getMessage());

@@ -1,12 +1,8 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by prasanth on 2/14/2018.
- */
+
 public class ChunkFileSplitter {
     private String _chunkFileName;
     LineNumberReader _reader;

@@ -1,4 +1,3 @@
-import sun.reflect.generics.tree.Tree;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +22,7 @@ public class ChunkFileSorter {
 					while (sortScan.hasNextLine()) {
 						studentList.add(sortScan.nextLine());
 					}
-					
+					sortScan.close();
 					studentList.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, 8))));
 					writeFile(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX), studentList);
 					sortedChunkFileList.add(fileName.replace(Constants.UNSORTED_FILE_PREFIX, Constants.SORTED_FILE_PREFIX));
