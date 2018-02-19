@@ -4,12 +4,27 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.*;
 
+/**
+ * This class has the functionalities to Sort all the small chunk files
+ */
+
 public class ChunkFileSorter {
 	private ArrayList<String> _chunkFileList;
+	
+	/**
+	 * @param chunkFileList Chunk filenames that has to be sorted
+	 */
 	public ChunkFileSorter(ArrayList<String> chunkFileList){
 		_chunkFileList=chunkFileList;
 	}
 	
+	/**
+	 * Reads each and every unsorted_chunk file and Sort the contents of the files.
+	 * 
+	 * Writes the Sorted content to a new file (sorted_chunk_1.txt)
+	 * 
+	 * @return List of names of Sorted file names
+	 */
 	public ArrayList<String> sort(){
 		ArrayList<String> sortedChunkFileList=new ArrayList<>();
 		try {
@@ -34,6 +49,11 @@ public class ChunkFileSorter {
 		return sortedChunkFileList;
 	}
 
+	/**
+	 * Performs the actual write to the file with the Sorted items
+	 * @param fileName: Name of the File
+	 * @param studentList: Sorted Student objects
+	 */
 	public void writeFile(String fileName,List<String> studentList){
 		BufferedWriter bw=null;
         try {

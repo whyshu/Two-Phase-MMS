@@ -1,6 +1,14 @@
-
+/**
+ * Represent the Student Object for a tuple
+ */
 public class Student {
 
+	/**
+	 * 
+	 * @param studentTuple
+	 * Parses the tuple based on the size of each field and 
+	 * updates the corresponding properties in the Student Object.
+	 */
     public Student(String studentTuple) {
         ID = Integer.parseInt(studentTuple.substring(0,8));
         firstName = studentTuple.substring(8,18);

@@ -3,7 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
-
+/**
+ * This class is abstraction for one block (40 Tuples or 4K of memory) from the input file
+ * Each instance of this class would point to one of the sorted chunk file.
+ */
 public class InputBlock extends Block{
 
     private int counter = -1;
@@ -28,6 +31,11 @@ public class InputBlock extends Block{
         return getRecord(nextDataIndex);
     }
 
+    /**
+     * @return True or False based on the data availability in the input block
+     * This is used to decide whether to reload the Block with the Next block of
+     * memory from the respective sorted_chuck file.
+     */
     public boolean isDataAvailable() {
         boolean isDataAvailable =  counter < _currentBlock.size();
 //        if(!isDataAvailable) {
@@ -36,6 +44,10 @@ public class InputBlock extends Block{
         return isDataAvailable;
     }
 
+    /**
+     * Returns the current data where the pointer currently pointing in the block
+     * @return
+     */
     public Student getCurrentData() {
         if(counter == -1) {
             getData();
@@ -43,6 +55,10 @@ public class InputBlock extends Block{
         return getRecord(counter);
     }
 
+    /**
+     * Loads the input block with the next block of memory from the respective sorted File.
+     * Next Block of memory means ==> Next 4K of data from the file which is equivalent to 40 tuples 
+     */
     private void load() {
         loadNextBlockIntoMemory();
         counter = -1;
@@ -55,6 +71,9 @@ public class InputBlock extends Block{
         //Performance end
     }
     
+    /**
+     * Closes the file reader and frees the memory
+     */
     public void finish() {
     	if(_reader != null) {
     		try {
@@ -77,6 +96,12 @@ public class InputBlock extends Block{
         return counter;
     }
 
+    
+    /**
+     * @param index Index of the data (tuple) in the current block.
+     * It searches the tuple for the given index and returns a Student object.
+     * @return Returns a Student object if the index is present or returns null
+     */
     private Student getRecord(int index) {
     	try{
 	        if(isDataAvailable()) {
@@ -92,6 +117,11 @@ public class InputBlock extends Block{
     	return null;
     }
 
+    /**
+     * Reads the next block of data (4k or 40 tuples) from the file.
+     * Converts those 40 tuples into list of Student Objects
+     * @return List of Student objects
+     */
     public ArrayList<Student> getBlock()  {
         ArrayList<Student> lines = new ArrayList<>();
         int lineCounter = 0;

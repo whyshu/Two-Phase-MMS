@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This Class is responsible for Merging all the Sorted chunk files
+ */
 public class BlockManager {
 
     private ArrayList<InputBlock> _inputBlocks = new ArrayList<>();
@@ -26,6 +29,16 @@ public class BlockManager {
     	}
     }
 
+    /**
+     * Fetches the top most item in each input block (Each sorted chunk)
+     * 
+     * Sort the items
+     * 
+     * Adds the first element in the sorted list in the output block
+     * 
+     * Fetches the next item only from the block from which the item is added to output
+     * 
+     */
     public void execute() {
         List<InputBlock> blocks = _inputBlocks.stream().filter(x -> x.isDataAvailable()).collect(Collectors.toList());
         //System.out.println(blocks.size());

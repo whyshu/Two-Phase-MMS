@@ -11,7 +11,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ *This Class has the methods to compute the bag difference of the sorted files
+ */
 public class BagDifference {
+	
+	/**
+	 * Reads the Sorted input file and creates a file with the items and its corresponding count 
+	 * @param filename
+	 * @param outputFilename
+	 * @return
+	 */
     public HashMap<String, Integer> readFile(String filename, String outputFilename) {
 
         HashMap<String, Integer> map = new LinkedHashMap<String, Integer>();
@@ -82,6 +92,13 @@ public class BagDifference {
         }
     }
 
+    /**
+     * Compares both the files and find the difference of the occurences of each tuple.
+     * Occurences in Input 1 - Occurences in Input 2
+     * Dumps all the bag difference information to a Bag difference file
+     * @param opFile1
+     * @param opFile2
+     */
    public void compareTuple(String opFile1,String opFile2){
 	File file1=new File(Constants.DATA_DIR + opFile1);
    	File file2=new File(Constants.DATA_DIR + opFile2);
@@ -113,6 +130,12 @@ public class BagDifference {
    
    
    private ArrayList<String> BagDiff = new ArrayList<>();
+   /**
+    * Compares and find the difference of the occurences of each tuple.
+     * Occurences of line1 - Occurences of line2
+    * @param line1
+    * @param line2
+    */
    public void calculateDifference(String line1,String line2){
 	    String[] splitStr1=line1.split("###");
 		String[] splitStr2=line2.split("###");

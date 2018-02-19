@@ -1,4 +1,8 @@
 
+/**
+ * This class has the static properties for all the Performance parameters
+ *
+ */
 public class Performance {
 	
 	public static int SplitterDiskIO = 0;

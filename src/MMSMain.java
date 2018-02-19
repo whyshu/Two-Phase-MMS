@@ -1,6 +1,20 @@
 import java.util.ArrayList;
 public class MMSMain {
 
+	/**
+	 * Loads the Input files
+	 * 
+	 * Split the input file into Small unsorted chunk files
+	 * 
+	 * Sort each Chunk file
+	 * 
+	 * Merge the Sorted Chunk file and create output file
+	 * 
+	 * Compute the Bag difference between the Sorted output files
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
     public static void main(String[] args) throws Exception {  
     	for(int fileCount=1;fileCount<=Constants.FILE_COUNT;fileCount++){
     		long startTimeSplit = System.nanoTime();		
@@ -46,10 +60,21 @@ public class MMSMain {
         	
         
     }
+    
+    /**
+     * Compute the difference between start and end time
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     public static long calcTotalTime(long startTime,long endTime){
     	long totalTime = endTime - startTime;
     	return totalTime;
     }
+    
+    /**
+     * Prints the performance metrics
+     */
     public  static void printPerformance(){
     	    System.out.println("Disk I/O Performance with RAM size :: "+(Runtime.getRuntime().totalMemory())/(1024*1024)+"MB");
     	 	System.out.println("Disk I/O for Splitting files :: "+Performance.SplitterDiskIO);
