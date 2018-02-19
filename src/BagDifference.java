@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -60,10 +61,27 @@ public class BagDifference {
             e.printStackTrace();
         }
 	}
+    
+    private  void writeBagDifferenceFile(ArrayList<String> buffer)  {
+        BufferedWriter bw=null;
+        try {
+            try {
+            	bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR + Constants.BAG_OUTPUT_FILE,true));
+                for (String student : buffer) {
+                    bw.write(student);
+                    bw.newLine();
+                }
+            }finally {
+                bw.close();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
    public void compareTuple(String opFile1,String opFile2){
-	File file1=new File(opFile1);
-   	File file2=new File(opFile2);
+	File file1=new File(Constants.DATA_DIR + opFile1);
+   	File file2=new File(Constants.DATA_DIR + opFile2);
    	try {
 			Scanner s1=new Scanner(file1);
 			Scanner s2=new Scanner(file2);
@@ -84,21 +102,27 @@ public class BagDifference {
 			}
 			s1.close();
 			s2.close();
+			writeBagDifferenceFile(BagDiff);
    	}catch(Exception e){
    		System.out.println(e.getMessage());
    	}
   }
    
+   
+   private ArrayList<String> BagDiff = new ArrayList<>();
    public void calculateDifference(String line1,String line2){
 	    String[] splitStr1=line1.split("###");
 		String[] splitStr2=line2.split("###");
 		if(Integer.parseInt(splitStr1[1])>Integer.parseInt(splitStr2[1])){
 			System.out.println(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
+			BagDiff.add(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
 		}else{
-			System.out.println(0);
+			BagDiff.add(splitStr1[0]+" "+ 0);
+		}
+		if(BagDiff.size() > 100) {
+			writeBagDifferenceFile(BagDiff);
+			BagDiff.clear();
 		}
    }
    
 }
-
-
