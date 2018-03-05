@@ -9,14 +9,14 @@ public class Constants {
     public static String BAG_OUTPUT_FILE = "bag_difference.txt";
     public static int RAM_SIZE=(int)Runtime.getRuntime().freeMemory();
     public static int BLOCK_SIZE=4096;
-    public static int BLOCK_COUNT=(RAM_SIZE/BLOCK_SIZE)/4;
+    public static int BLOCK_COUNT=(RAM_SIZE/BLOCK_SIZE)/2;
     public static int FILE_COUNT=2;
     
     public static double getMultiplier(){
     	if(RAM_SIZE>8*1024*1024){
     		return 4;
     	}else{
-    		return 1;
+    		return 2;
     	}
     }
     

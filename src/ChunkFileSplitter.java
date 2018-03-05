@@ -46,17 +46,19 @@ public class ChunkFileSplitter {
                 int lineCounter = 0;
                 String currentFileName= Constants.SORTED_FILE_PREFIX + chunkCount + ".txt";
                 
-                ArrayList<String> unsortedLines = new ArrayList<String>();
+                //ArrayList<String> unsortedLines = new ArrayList<String>();
+                ArrayList<byte[]> unsortedLines = new ArrayList<byte[]>();
+
                 while ((lineCounter < blockCount * 40) && _scanner.hasNextLine() && ( line =_scanner.nextLine())!= null ) {
                     //System.out.println(line);
-                	unsortedLines.add(line);
+                	unsortedLines.add(line.getBytes());
                     lineCounter++;
                 }
                 
-                unsortedLines.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, 8))));
+                unsortedLines.sort(Comparator.comparing(s -> new String(s)));
                 bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR+currentFileName, true));
-                for(String s: unsortedLines) {
-                    bw.write(s);
+                for(byte[] s: unsortedLines) {
+                    bw.write(new String(s));
                     bw.newLine();
                 }
                 bw.close();
