@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class OutputBlock extends Block{
 
     private int counter = -1;
-    ArrayList<Student> _opBuffer=new ArrayList<>();
+    ArrayList<String> _opBuffer=new ArrayList<>();
 
     public OutputBlock() {
 
@@ -28,16 +28,16 @@ public class OutputBlock extends Block{
      * 
      * @param data (Tuple of type Student)
      */
-    public void add(Student data) {
+    public void add(String data) {
         counter = counter + 1;
         addToBuffer(counter, data);
-        if(counter == BLOCK_MAX_INDEX) {
+        if(counter == BLOCKSIZE*50*Constants.getMultiplier() - 1) {
             writeToFile();
             counter = -1;
         }
     }
 
-    private void addToBuffer(int counter, Student data) {
+    private void addToBuffer(int counter, String data) {
         _opBuffer.add(data);
         //System.out.println("Added to output buffer " + data);
     }
@@ -68,8 +68,8 @@ public class OutputBlock extends Block{
         try {
             try {
                 bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR + Constants.OUTPUT_FILE,true));
-                for (Student student : _opBuffer) {
-                    bw.write(student.toString());
+                for (String student : _opBuffer) {
+                    bw.write(student);
                     bw.newLine();
                 }
             }finally {

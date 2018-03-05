@@ -16,25 +16,25 @@ public class MMSMain {
 	 * @throws Exception
 	 */
     public static void main(String[] args) throws Exception {  
-    	for(int fileCount=1;fileCount<=Constants.FILE_COUNT;fileCount++){
+    	for(int fileCount = 1;fileCount<=Constants.FILE_COUNT;fileCount++){
     		long startTimeSplit = System.nanoTime();		
 	        ChunkFileSplitter chunkFileSplitter=new ChunkFileSplitter(Constants.INPUT_FILE+fileCount+".txt");
 	        ArrayList<String> chunkFileList=chunkFileSplitter.execute(Constants.BLOCK_COUNT);
     		long endTimeSplit   = System.nanoTime();
     		Performance.SplittingTime+=calcTotalTime(startTimeSplit,endTimeSplit);
-    		
-    		
-    		long startTimeSort = System.nanoTime();	
-	        ChunkFileSorter chunkFileSorter=new ChunkFileSorter(chunkFileList);
-	        ArrayList<String> sortedChunkFileList=chunkFileSorter.sort();
-    		long endTimeSort   = System.nanoTime();
-    		Performance.SortingTime+=calcTotalTime(startTimeSort,endTimeSort);
-
+//    		
+//    		
+////    		long startTimeSort = System.nanoTime();	
+////	        ChunkFileSorter chunkFileSorter=new ChunkFileSorter(chunkFileList);
+////	        ArrayList<String> sortedChunkFileList=chunkFileSorter.sort();
+////    		long endTimeSort   = System.nanoTime();
+////    		Performance.SortingTime+=calcTotalTime(startTimeSort,endTimeSort);
+//
 	        LineCounter lineCounter=new LineCounter();
 	        int lineCount=lineCounter.count(Constants.INPUT_FILE+fileCount+".txt");
 	        
 	        long startTimeMerge = System.nanoTime();	
-	        BlockManager bm = new BlockManager(sortedChunkFileList.size());
+	        BlockManager bm = new BlockManager(chunkFileList.size());
 	        for (int i=0; i<lineCount; i++) {
 	          bm.execute();
 	        }
@@ -47,7 +47,7 @@ public class MMSMain {
 	        cleanup.renameOutputFile(Constants.OUTPUT_FILE,fileCount);
 	        cleanup.deleteChunks();    
     	}	
-        
+
     	long startTimeDiff = System.nanoTime();	
         BagDifference bagDifference = new BagDifference();
         bagDifference.readFile(Constants.DATA_DIR + Constants.OUTPUT_FILE+"1"+".txt", "output1.txt");
@@ -55,10 +55,7 @@ public class MMSMain {
         bagDifference.compareTuple("output1.txt","output2.txt");
         long endTimeDiff  = System.nanoTime();
         Performance.BagDifferenceTime+=calcTotalTime(startTimeDiff,endTimeDiff);
-		
         printPerformance();
-        	
-        
     }
     
     /**

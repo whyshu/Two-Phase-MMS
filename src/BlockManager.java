@@ -48,7 +48,7 @@ public class BlockManager {
                 minInputBlock = inputBlock;
             }
         }
-        _outputBlock.add(minInputBlock.getCurrentData());
+        _outputBlock.add(minInputBlock.getCurrentData().toString());
         minInputBlock.getData();
     }
 }

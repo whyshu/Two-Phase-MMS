@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -43,13 +44,20 @@ public class ChunkFileSplitter {
             while (_scanner.hasNextLine()) {
                 String line;
                 int lineCounter = 0;
-                String currentFileName= Constants.UNSORTED_FILE_PREFIX + chunkCount + ".txt";
-                bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR+currentFileName, true));
+                String currentFileName= Constants.SORTED_FILE_PREFIX + chunkCount + ".txt";
+                
+                ArrayList<String> unsortedLines = new ArrayList<String>();
                 while ((lineCounter < blockCount * 40) && _scanner.hasNextLine() && ( line =_scanner.nextLine())!= null ) {
                     //System.out.println(line);
-                    bw.write(line);
-                    bw.newLine();
+                	unsortedLines.add(line);
                     lineCounter++;
+                }
+                
+                unsortedLines.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, 8))));
+                bw = new BufferedWriter(new FileWriter(Constants.DATA_DIR+currentFileName, true));
+                for(String s: unsortedLines) {
+                    bw.write(s);
+                    bw.newLine();
                 }
                 bw.close();
                 chunkFileList.add(currentFileName);

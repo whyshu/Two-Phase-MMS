@@ -34,7 +34,7 @@ public class BagDifference {
                 if (prev.equals(line)) {
                     map.put(line, map.get(line) + 1);
                 } else {
-                	if (map.size()>10000){
+                	if (map.size()>10000*Constants.getBagDiffMultiplier()){
                 		writeFile(outputFilename,map);
                 		map.clear();
                 	}
