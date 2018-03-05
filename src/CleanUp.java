@@ -17,7 +17,7 @@ public class CleanUp {
 	
 	public void deleteChunks(){
 		 //Delete unsorted and sorted chunks
-        File folder = new File(".\\"+Constants.DATA_DIR);
+        File folder = new File(Constants.DATA_DIR);
         for (File currFile : folder.listFiles()) {
 	         if (currFile.getName().contains(Constants.UNSORTED_FILE_PREFIX)) {
 	        	 currFile.delete();

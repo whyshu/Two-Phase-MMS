@@ -127,7 +127,7 @@ public class InputBlock extends Block{
         int lineCounter = 0;
         try{
             String line;
-            while ( lineCounter < 40  && ((line = _reader.readLine()) != null)) {
+            while ( lineCounter < BLOCKSIZE  && ((line = _reader.readLine()) != null)) {
                 //System.out.println(line);
                 Student s=new Student(line);
                 //System.out.println("Object Created");

@@ -143,9 +143,9 @@ public class BagDifference {
 			//System.out.println(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
 			BagDiff.add(splitStr1[0]+" "+(Integer.parseInt(splitStr1[1])-Integer.parseInt(splitStr2[1])));
 		}else{
-			BagDiff.add(splitStr1[0]+" "+ 0);
+			BagDiff.add("0");
 		}
-		if(BagDiff.size() > 100) {
+		if(BagDiff.size() > 10000) {
 			writeBagDifferenceFile(BagDiff);
 			BagDiff.clear();
 		}
